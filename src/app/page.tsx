@@ -2,6 +2,11 @@ import LoginButton from "@/components/LoginButton";
 import BookmarksClient from "@/components/BookmarksClient";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import VantaBackground from "@/components/VantaBackground";
+import VantaBackgroundOfBookMark from "@/components/VantaBackgroundOfBookMark";
+import LogoutButton from "@/components/LogoutButton";
+import AuthVantaLayer from "@/components/AuthVantaLayer";
+
+
 
 export default async function Home() {
   const supabase = await createSupabaseServerClient();
@@ -13,13 +18,14 @@ export default async function Home() {
   if (!user) {
     return (
       <main className="relative min-h-screen flex items-center justify-center px-4">
+         <AuthVantaLayer isLoggedIn={!!user} />
         <VantaBackground />
 
-        <div className="w-full max-w-md rounded-2xl bg-white/80 backdrop-blur-md shadow-xl border border-white/40 p-8">
+        <div className="w-full max-w-md rounded-2xl bg-grey/80 backdrop-blur-md shadow-xl border border-white/40 p-8">
           <h1 className="text-3xl font-semibold tracking-tight">
             Smart Bookmark App
           </h1>
-          <p className="mt-2 text-gray-700">
+          <p className="mt-2 text-white-700">
             Save links securely and access them anywhere.
           </p>
 
@@ -27,7 +33,7 @@ export default async function Home() {
             <LoginButton />
           </div>
 
-          <p className="mt-4 text-xs text-gray-600">
+          <p className="mt-4 text-xs text-white-600">
             Google login only • Your bookmarks are private (RLS secured)
           </p>
         </div>
@@ -51,13 +57,37 @@ export default async function Home() {
 
 
   return (
-    <main className="p-8 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-semibold">Smart Bookmark App</h1>
-      <p className="mt-2 text-gray-700">
+    <>
+    <main className="relative min-h-screen px-4">
+
+    {/* ✅ ONE Vanta background always */}
+    <VantaBackgroundOfBookMark />
+
+    {/* ✅ Top Left - user email */}
+    <div className="absolute top-6 left-6 z-20">
+      <p className="text-white/90">
         Logged in as: <b>{user.email}</b>
       </p>
+    </div>
 
-      <BookmarksClient initialBookmarks={bookmarks ?? []} userId={user.id} />
-    </main>
+    {/* ✅ Top Right - logout */}
+    <div className="absolute top-6 right-6 z-20 ">
+      <LogoutButton />
+    </div>
+
+    {/* ✅ Center Card */}
+    <div className="min-h-screen  flex items-center justify-center">
+      <div className="relative w-full max-w-2xl p-8 bg-white/10  backdrop-blur-sm border border-white/20 shadow-xl rounded-2xl">
+        <h1 className="text-2xl font-semibold text-white">
+          Smart Bookmark App
+        </h1>
+
+        <BookmarksClient initialBookmarks={bookmarks ?? []} userId={user.id} />
+      </div>
+    </div>
+
+  </main>
+
+</>
   );
 }

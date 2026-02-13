@@ -140,10 +140,10 @@ export default function BookmarksClient({
 };
 
   return (
-    <div className="mt-6">
-      <div className="flex flex-col sm:flex-row gap-2">
+    <div className="mt-10  px-4">
+    <div className="w-full max-w-3xl  bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-6">
         <input
-          className="border rounded px-3 py-2 flex-1"
+          className="border rounded px-3 py-2 flex-1 "
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -157,7 +157,7 @@ export default function BookmarksClient({
         <button
           onClick={addBookmark}
           disabled={loading}
-          className="px-4 py-2 rounded bg-black text-white disabled:opacity-50"
+          className="px-5 py-2 rounded-xl bg-black/80 text-white hover:bg-black hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl disabled:opacity-50"
         >
           {loading ? "Adding..." : "Add"}
         </button>
@@ -165,7 +165,7 @@ export default function BookmarksClient({
 
       <div className="mt-6">
         {bookmarks.length === 0 ? (
-          <p className="text-gray-600">No bookmarks yet.</p>
+          <p className="text-white-600">No bookmarks yet.</p>
         ) : (
           <ul className="space-y-3">
             {bookmarks.map((b) => (
@@ -179,14 +179,14 @@ export default function BookmarksClient({
                     href={b.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-sm text-blue-600 underline break-words"
+                    className="text-sm text-green-400 underline break-words"
                   >
                     {b.url}
                   </a>
                 </div>
                 <button
                   onClick={() => deleteBookmark(b.id)}
-                  className="text-sm text-red-600 underline shrink-0"
+                  className="px-5 py-2 rounded-xl bg-red-600 text-white hover:bg-red-700 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl disabled:opacity-50"
                 >
                   Delete
                 </button>
