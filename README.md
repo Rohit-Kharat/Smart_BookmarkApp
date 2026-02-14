@@ -9,7 +9,7 @@ This application satisfies all challenge requirements including Google OAuth log
 ## 🌐 Live Demo
 
 **Vercel URL:**  
-https://your-vercel-url.vercel.app
+[https://your-vercel-url.vercel.app](https://smart-bookmark-app-two-tau.vercel.app/)
 
 (Test using your own Google account.)
 
